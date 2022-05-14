@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telegramm/pages/home.dart';
 import 'package:telegramm/pages/search.dart';
+import 'package:telegramm/pages/settings_page.dart';
 import 'package:telegramm/pages/sidebar.dart';
 
 void main() {
@@ -16,11 +17,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: HomePage(Colors.blue),
       routes: {
-        HomePage.id:(context)=>HomePage(),
-        SideBar.id:(context)=>SideBar(),
+        HomePage.id:(context)=>HomePage(Colors.blue),
+        SideBar.id:(context)=>SideBar(Colors.red),
         SearchPage.id:(context)=>SearchPage(),
+        SettingPage.id:(context)=>SettingPage(),
+
       },
     );
   }

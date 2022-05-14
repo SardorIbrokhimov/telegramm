@@ -16,12 +16,13 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+       leading:  IconButton(
+           onPressed: () {
+             Navigator.pushReplacementNamed(context, HomePage.id);
+           },
+           icon: Icon(Icons.arrow_back)),
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, HomePage.id);
-              },
-              icon: Icon(Icons.arrow_back))
+
         ],
         title: Text("Search Page"),
       ),
@@ -29,14 +30,13 @@ class _SearchPageState extends State<SearchPage> {
         scrollDirection: Axis.horizontal,
         children: [
           Column(
-
             children: [
-              SizedBox(height: 8,),
+              SizedBox(
+                height: 8,
+              ),
               Container(
                 child: Row(
-
                   children: [
-
                     ClipOval(
                       child: Image(
                         width: 60,
@@ -139,7 +139,6 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
-
             ],
           ),
         ],

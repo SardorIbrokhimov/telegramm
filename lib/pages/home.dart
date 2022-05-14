@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:telegramm/pages/all_page.dart';
+import 'package:telegramm/pages/bot_page.dart';
+import 'package:telegramm/pages/channel_page.dart';
+import 'package:telegramm/pages/group_page.dart';
+import 'package:telegramm/pages/personal_page.dart';
 import 'package:telegramm/pages/search.dart';
+import 'package:telegramm/pages/selected_page.dart';
 import 'package:telegramm/pages/sidebar.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = "home";
+  final Color color;
+  HomePage( this.color);
+  Color colorBlack=Colors.black12;
+  Color colorWhite=Colors.white;
+  Color colorappbar=Colors.black12;
+  Color colorsidebar=Colors.black12;
+  Color colortext=Colors.black12;
+  Color coloricon=Colors.black12;
 
-  const HomePage({Key? key}) : super(key: key);
+
+
+
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,58 +37,62 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Telegram'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, SearchPage.id);
-            },
-            icon: Icon(Icons.search),
+    return DefaultTabController(
+        length: 6,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: widget.color,
+            title: Text('Telegram'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, SearchPage.id);
+                },
+                icon: Icon(Icons.search),
+              ),
+            ],
+            bottom: TabBar(
+              isScrollable: true,
+              tabs: [
+                Tab(
+                  icon: Icon(Icons.home_filled),
+                  text: "All",
+                ),
+                Tab(
+                  icon: Icon(Icons.person),
+                  text: "Personal",
+                ),
+                Tab(
+                  icon: Icon(Icons.folder),
+                  text: "Channels",
+                ),
+                Tab(
+                  icon: Icon(Icons.people),
+                  text: "Groups",
+                ),
+                Tab(
+                  icon: Icon(Icons.adb),
+                  text: "Bots",
+                ),
+                Tab(
+                  icon: Icon(Icons.star),
+                  text: "Selected",
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-      drawer: SideBar(),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        padding: EdgeInsets.all(5),
-        children: [
-          account(
-              title: "Name 1",
-              image:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvNPSRqfWBUEBF8yov54Mc7CR-IYr8LwjG4w&usqp=CAU"),
-          account(
-              title: "Name 2",
-              image:
-                  "https://avatars.mds.yandex.net/i?id=c2261683f1691cc23e066f49fab99a3c-5603780-images-thumbs&n=13"),
-          account(
-              title: "Name 2",
-              image:
-                  "https://avatars.mds.yandex.net/i?id=c2261683f1691cc23e066f49fab99a3c-5603780-images-thumbs&n=13"),
-          account(
-              title: "Name 2",
-              image:
-                  "https://avatars.mds.yandex.net/i?id=c2261683f1691cc23e066f49fab99a3c-5603780-images-thumbs&n=13"),
-          account(
-              title: "Name 2",
-              image:
-                  "https://avatars.mds.yandex.net/i?id=c2261683f1691cc23e066f49fab99a3c-5603780-images-thumbs&n=13"),
-          account(
-              title: "Name 2",
-              image:
-                  "https://avatars.mds.yandex.net/i?id=c2261683f1691cc23e066f49fab99a3c-5603780-images-thumbs&n=13"),
-          account(
-              title: "Name 2",
-              image:
-                  "https://avatars.mds.yandex.net/i?id=c2261683f1691cc23e066f49fab99a3c-5603780-images-thumbs&n=13"),
-          account(
-              title: "Name 2",
-              image:
-                  "https://avatars.mds.yandex.net/i?id=c2261683f1691cc23e066f49fab99a3c-5603780-images-thumbs&n=13")
-        ],
-      ),
-    );
+          drawer: SideBar(widget.color),
+          body: TabBarView(
+            children: [
+              AllPage(widget.color),
+              PersonPage(widget.color),
+              ChannelPage(widget.color),
+              GroupPage(widget.color),
+              BotPage(widget.color),
+              SelectedPage(widget.color),
+            ],
+          ),
+        ));
   }
 
   Widget account({title, image}) {
